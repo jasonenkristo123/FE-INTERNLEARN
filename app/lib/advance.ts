@@ -1,37 +1,36 @@
 type user = {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    age: number;
+  id: number
+  name: string
+  email: string
+  password: string
+  age: number
 }
 
-type updateUser = Partial<user>; // mengubah semua field menjadi optional
+type updateUser = Partial<user> // mengubah semua field menjadi optional
 
 interface username {
-    name?: string;
-    age?: number;
+  name?: string
+  age?: number
 }
 
-type RequiredUsername = Required<username>;
+type RequiredUsername = Required<username>
 
 type UserLogin = {
-    email: string;
-    password: string;
-    number: number;
+  email: string
+  password: string
+  number: number
 }
 
-type emailUser = Pick<UserLogin, "email">; // hanya memilih email
+type emailUser = Pick<UserLogin, 'email'> // hanya memilih email
 
-type RemoveNumber = Omit<UserLogin, "number">; // remove
+type RemoveNumber = Omit<UserLogin, 'number'> // remove
 
-type role = "admin" | "user" | "guest";
+type role = 'admin' | 'user' | 'guest'
 
-type Permisi = Record<role, boolean>;
+type Permisi = Record<role, boolean>
 
 const permissions: Permisi = {
-    admin: true,
-    user: false,
-    guest: false
+  admin: true,
+  user: false,
+  guest: false,
 }
-
