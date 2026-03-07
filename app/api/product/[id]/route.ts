@@ -1,5 +1,1 @@
-
-
-export default async function GET() {
-    
-}
+export default async function GET() {}
