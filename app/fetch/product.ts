@@ -1,5 +1,3 @@
-
-
 const getProducts = async (url: string) => {
   try {
     const res = await fetch(url)
@@ -11,7 +9,7 @@ const getProducts = async (url: string) => {
     return res.json()
   } catch (error) {
     console.log('Error', error)
-  } 
+  }
 }
 
-export default getProducts;
+export default getProducts
