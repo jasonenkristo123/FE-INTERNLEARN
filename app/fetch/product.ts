@@ -2,8 +2,8 @@ const getProducts = async (url: string) => {
   try {
     const res = await fetch(url, {
       next: {
-        revalidate: 3600
-      }
+        revalidate: 3600,
+      },
     })
 
     if (!res.ok) {

@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { LoginSchema, LoginType } from '../schema/auth.schema'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
   // 1. Setup states for our form inputs and validation errors
@@ -23,9 +25,27 @@ export default function Login() {
       setErrors({ ...errors, [e.target.id]: undefined })
     }
   }
+  const { push } = useRouter()
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const res = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+        callbackUrl: '/dashboard'
+      })
+
+      if (!res?.error) {
+        push('/dashboard')
+      } else {
+        console.log('Login error:', res.error);
+      }
+    } catch (error) {
+      console.log('Login error:', error);
+    }
 
     const result = LoginSchema.safeParse(formData)
 
