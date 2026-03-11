@@ -28,23 +28,23 @@ export default function Login() {
   const { push } = useRouter()
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       const res = await signIn('credentials', {
         email: formData.email,
         password: formData.password,
         redirect: false,
-        callbackUrl: '/dashboard'
+        callbackUrl: '/dashboard',
       })
 
       if (!res?.error) {
         push('/dashboard')
       } else {
-        console.log('Login error:', res.error);
+        console.log('Login error:', res.error)
       }
     } catch (error) {
-      console.log('Login error:', error);
+      console.log('Login error:', error)
     }
 
     const result = LoginSchema.safeParse(formData)

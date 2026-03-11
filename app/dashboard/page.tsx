@@ -1,19 +1,18 @@
-"use client"
+'use client'
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Dashboard() {
-  const { data: session, status }: { data: any, status: any} = useSession();
-  const router = useRouter();
+  const { data: session, status } = useSession()
+  const router = useRouter()
 
   useEffect(() => {
-    if (status === 'unauthenticated' && session?.user.role !== 'admin') {
+    if (status === 'unauthenticated') {
       router.push('/login')
     }
-  }, [status, router, session?.user.role])
+  }, [status, router])
 
   return (
     <section className="w-full flex justify-center items-center flex-col gap-4">
