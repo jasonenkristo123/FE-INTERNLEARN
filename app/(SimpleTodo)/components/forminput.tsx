@@ -1,7 +1,3 @@
-
-
 export default function FormInput() {
-    return(
-        <h1>halo</h1>
-    )
+  return <h1>halo</h1>
 }
