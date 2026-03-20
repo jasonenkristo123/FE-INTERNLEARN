@@ -2,24 +2,38 @@ import { create } from 'zustand'
 
 interface TodoState {
     todos: string[]
+    editingIndex: number | null
+
     addTodo: (todo: string) => void
     removeTodo: (index: number) => void
     editTodo: (index: number, newTodo: string) => void
+    setEditingIndex: (index: number | null) => void
 }
 
 export const useTodoState = create<TodoState>((set) => ({
     todos: [],
+    editingIndex: null,
+
     addTodo: (todo) =>
-        set((state) => {
-            state.todos.push(todo)
-            return { todos: state.todos }
-        }),
+        set((state) => ({
+            todos: [...state.todos, todo], 
+        })),
+
     removeTodo: (index) =>
         set((state) => ({
-            todos: state.todos.slice(0, index).concat(state.todos.slice(index + 1)),
+            todos: state.todos.filter((_, i) => i !== index),
         })),
+
     editTodo: (index, newTodo) =>
         set((state) => ({
-            todos: state.todos.map((todo, i) => (i === index ? newTodo : todo)),
+            todos: state.todos.map((todo, i) =>
+                i === index ? newTodo : todo
+            ),
+            editingIndex: null, // selesai edit
+        })),
+
+    setEditingIndex: (index) =>
+        set(() => ({
+            editingIndex: index,
         })),
 }))
